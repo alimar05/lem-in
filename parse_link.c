@@ -25,16 +25,22 @@ char			parse_link(t_lemin *lemin, char *line)
 		while (*line == ' ' || *line == '\t')
 			line++;
 		i = 0;
-		while (*line && *line != '-' && *line != ' ' && *line == '\t')
+		while (*line && *line != '-')
+		{
+			if (*line == ' ' || *line == '\t')
+				return (0);
 			*(name1 + i++) = *line++;
-		if (*line == '\0')
-			return (0);
+		}
 		line++;
-		if (*line == '\0')
+		if (*line == '\0' || *line == ' ' || *line == '\t')
 			return (0);
 		i = 0;
-		while (*line && *line != ' ' && *line != '\t')
+		while (*line)
+		{
+			if (*line == ' ' || *line == '\t')
+				return (0);
 			*(name2 + i++) = *line++;
+		}
 		if (ft_strlen(line))
 			return (0);
 		printf("%s-%s\n", name1, name2);
