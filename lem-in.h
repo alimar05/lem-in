@@ -25,7 +25,7 @@ typedef struct			s_node
 
 typedef struct			s_lst
 {
-	t_node				node;
+	unsigned long int	name_hash;
 	struct s_lst		*next;
 }						t_lst;
 
@@ -43,10 +43,10 @@ typedef struct			s_lemin
 }						t_lemin;
 
 
-t_lst					*ft_lst_push_back(t_lst *lst, t_node *node);
-t_adjlst				*ft_adjlst_push_back(t_adjlst *adjlst, t_node *node);
-void					free_lst(t_lst **lst);
-void					free_adjlst(t_adjlst **adjlst);
+t_lst					*ft_lst_push_back(t_adjlst *adjlst, unsigned long int name_hash);
+t_adjlst				*ft_adjlst_push_back(t_lemin *lemin, t_node *node);
+void					free_lst(t_adjlst *adjlst);
+void					free_adjlst(t_lemin *lemin);
 char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);
 unsigned long int		ft_hash(const char *str);

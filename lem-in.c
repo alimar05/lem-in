@@ -12,14 +12,42 @@
 
 #include "lem-in.h"
 
+void			initialize(t_lemin *lemin, char **line)
+{
+	*line = NULL;
+	lemin->number_of_ants = 0;
+	lemin->adjlst = NULL;
+}
+
 int 			main(void)
 {
 	char		*line;
 	t_lemin		lemin;
+	t_lst		*buffer;
 
-	get_next_line(0, &line);
-	if (!parse_link(&lemin, line))
-		write(2, "ERROR\n", 6);
+	initialize(&lemin, &line);
+	while (get_next_line(0, &line))
+	{
+		if (!parse_room(&lemin, line))
+		{
+			if (!parse_link(lemin.adjlst, line))
+			{
+				free_lst(lemin.adjlst);
+				write(2, "ERROR\n", 6);
+			}
+			else
+				continue ;
+			free_adjlst(&lemin);
+			write(2, "ERROR\n", 6);
+		}
+		free(line);
+	}
+	buffer = lemin.adjlst->lst;
+	while (buffer)
+	{
+		printf("name = %lu", buffer->name_hash);
+		buffer = buffer->next;
+	}
 /*
 
 	if (get_next_line(0, &line))

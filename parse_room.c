@@ -68,7 +68,7 @@ char						parse_room(t_lemin *lemin, char *line)
 		if (ft_strlen(line))
 			return (0);
 		node.name_hash = ft_hash(name);
-		lemin->adjlst = ft_adjlst_push_back(lemin->adjlst, &node);
+		lemin->adjlst = ft_adjlst_push_back(lemin, &node);
 		return (1);
 	}
 }

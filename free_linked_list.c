@@ -12,28 +12,38 @@
 
 #include "lem-in.h"
 
-void			free_lst(t_lst **lst)
+void			free_lst(t_adjlst *adjlst)
 {
 	t_lst				*victim;
+	t_lst			*buffer;
 
-	while (*lst)
+	if (adjlst && adjlst->lst)
 	{
-		victim = *lst;
-		*lst = victim->next;
-		free(victim);
+		buffer = adjlst->lst;
+		while (buffer)
+		{
+			victim = buffer;
+			buffer = victim->next;
+			free(victim);
+		}
+		adjlst->lst = NULL;
 	}
-	*lst = NULL;
 }
 
-void			free_adjlst(t_adjlst **adjlst)
+void			free_adjlst(t_lemin *lemin)
 {
 	t_adjlst			*victim;
+	t_adjlst			*buffer;
 
-	while (*adjlst)
+	if (lemin->adjlst)
 	{
-		victim = *adjlst;
-		*adjlst = victim->next;
-		free(victim);
+		buffer = lemin->adjlst;
+		while (buffer)
+		{
+			victim = buffer;
+			buffer = victim->next;
+			free(victim);
+		}
+		lemin->adjlst = NULL;
 	}
-	*adjlst = NULL;
 }
