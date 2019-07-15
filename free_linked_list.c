@@ -47,3 +47,20 @@ void			free_adjlst(t_lemin *lemin)
 		lemin->adjlst = NULL;
 	}
 }
+
+void			free_graph(t_lemin *lemin)
+{
+	t_adjlst			*adjlst;
+
+	if (lemin->adjlst)
+	{
+		adjlst = lemin->adjlst;
+		while (adjlst)
+		{
+			if (adjlst->lst)
+				free_lst(adjlst);
+			adjlst = adjlst->next;
+		}
+		free_adjlst(lemin);
+	}
+}

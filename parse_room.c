@@ -63,6 +63,7 @@ char						parse_room(t_lemin *lemin, char *line)
 		i = 0;
 		while (*line && *line != ' ' && *line != '\t')
 			*(name + i++) = *line++;
+		*(name + i) = '\0';
 		if (!parse_coord(&line, &node))
 			return (0);
 		if (ft_strlen(line))

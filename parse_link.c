@@ -12,16 +12,19 @@
 
 #include "lem-in.h"
 
-char			add_link_to_adjlst(t_adjlst *adjlst,
+char			add_link_to_adjlst(t_lemin *lemin,
 		unsigned long int name_hash1, unsigned long int name_hash2)
 {
-	if (adjlst)
+	t_adjlst	*adjlst;
+
+	if (lemin->adjlst)
 	{
+		adjlst = lemin->adjlst;
 		while (adjlst)
 		{
 			if (adjlst->node.name_hash == name_hash1)
 			{
-				adjlst->lst = ft_lst_push_back(lemin, name_hash2);
+				adjlst->lst = ft_lst_push_back(adjlst, name_hash2);
 				return (1);
 			}
 			adjlst = adjlst->next;
@@ -30,7 +33,7 @@ char			add_link_to_adjlst(t_adjlst *adjlst,
 	return (0);
 }
 
-char			parse_link(t_adjlst *adjlst, char *line)
+char			parse_link(t_lemin *lemin, char *line)
 {
 	int			i;
 	char		name1[4096];
@@ -49,7 +52,9 @@ char			parse_link(t_adjlst *adjlst, char *line)
 				return (0);
 			*(name1 + i++) = *line++;
 		}
-		line++;
+		*(name1 + i) = '\0';
+		if (*line == '-')
+			line++;
 		if (*line == '\0' || *line == ' ' || *line == '\t')
 			return (0);
 		i = 0;
@@ -59,14 +64,11 @@ char			parse_link(t_adjlst *adjlst, char *line)
 				return (0);
 			*(name2 + i++) = *line++;
 		}
+		*(name2 + i) = '\0';
 		if (ft_strlen(line))
 			return (0);
-//		printf("%s-%s\n", name1, name2);
-		if (!(add_link_to_adjlst(adjlst, ft_hash(name1), ft_hash(name2))))
-		{
-			// TO DO free graph
-			write(2, "ERROR\n", 6);
-		}
+		if (!(add_link_to_adjlst(lemin, ft_hash(name1), ft_hash(name2))))
+			return (0);
 		return (1);
 	}
 }
