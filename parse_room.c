@@ -48,6 +48,25 @@ static char					parse_coord(char **line, t_node *node)
 	return (1);
 }
 
+static char					is_duple_room(t_lemin *lemin, t_node *node)
+{
+	t_adjlst	*adjlst;
+
+	if (lemin->adjlst)
+	{
+		adjlst = lemin->adjlst;
+		while (adjlst)
+		{
+			if (adjlst->node.name_hash == node->name_hash)
+				return (1);
+			if ((adjlst->node.x == node->x) && (adjlst->node.y == node->y))
+				return (1);
+			adjlst = adjlst->next;
+		}
+	}
+	return (0);
+}
+
 char						parse_room(t_lemin *lemin, char *line)
 {
 	int			i;
@@ -69,6 +88,8 @@ char						parse_room(t_lemin *lemin, char *line)
 		if (ft_strlen(line))
 			return (0);
 		node.name_hash = ft_hash(name);
+		if (is_duple_room(lemin, &node))
+			return (0);
 		lemin->adjlst = ft_adjlst_push_back(lemin, &node);
 		return (1);
 	}
