@@ -39,15 +39,24 @@ static char		parse_link_names(char *name1, char *name2, char **line)
 	return (1);
 }
 
-static char		is_duple_link(t_lst *lst, unsigned long int name_hash2)
+static char		is_not_link(t_adjlst *adjlst, t_lst *lst,
+		unsigned long int name_hash2)
 {
-	while (lst)
+	while (adjlst)
 	{
-		if (lst->name_hash == name_hash2)
-			return (1);
-		lst = lst->next;
+		if (adjlst->node.name_hash == name_hash2)
+		{
+			while (lst)
+			{
+				if (lst->name_hash == name_hash2)
+					return (1);
+				lst = lst->next;
+			}
+			return (0);
+		}
+		adjlst = adjlst->next;
 	}
-	return (0);
+	return (1);
 }
 
 static char		add_link_to_adjlst(t_lemin *lemin,
@@ -65,7 +74,7 @@ static char		add_link_to_adjlst(t_lemin *lemin,
 		{
 			if (adjlst->node.name_hash == name_hash1)
 			{
-				if (is_duple_link(adjlst->lst, name_hash2))
+				if (is_not_link(lemin->adjlst, adjlst->lst, name_hash2))
 					return (0);
 				else
 				{

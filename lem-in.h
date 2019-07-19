@@ -39,6 +39,7 @@ typedef struct			s_adjlst
 typedef struct			s_lemin
 {
 	int					number_of_ants;
+	unsigned int			is_ants:1;
 	t_adjlst			*adjlst;
 }						t_lemin;
 
@@ -52,4 +53,5 @@ char					parse_link(t_lemin *lemin, char *line);
 unsigned long int			ft_hash(const char *str);
 void					free_graph(t_lemin *lemin);
 
+# define ERROR(line) free(line); write(2, "ERROR\n", 6); return (0)
 #endif
