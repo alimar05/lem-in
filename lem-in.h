@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:35:01 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/13 16:28:44 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/20 14:50:51 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct			s_adjlst
 typedef struct			s_lemin
 {
 	int					number_of_ants;
-	unsigned int			is_ants:1;
+	unsigned int		is_ants:1;
 	t_adjlst			*adjlst;
 }						t_lemin;
 
@@ -50,8 +50,6 @@ void					free_lst(t_adjlst *adjlst);
 void					free_adjlst(t_lemin *lemin);
 char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);
-unsigned long int			ft_hash(const char *str);
+unsigned long int		ft_hash(const char *str);
 void					free_graph(t_lemin *lemin);
-
-# define ERROR(line) free(line); write(2, "ERROR\n", 6); return (0)
 #endif

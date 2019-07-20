@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/13 16:27:18 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/20 14:51:05 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,16 @@ char			parse_line(t_lemin *lemin, char *line)
 			if (!parse_link(lemin, line))
 			{
 				free_graph(lemin);
-				ERROR(line);
+				write(2, "ERROR\n", 6);
+				return (0);
 			}
 		}
 		else
 		{
-			ERROR(line);
+			write(2, "ERROR\n", 6);
+			return (0);
 		}
 	}
-	free(line);
 	return (1);
 }
 
@@ -74,9 +75,16 @@ int 			main(void)
 	while (get_next_line(0, &line))
 	{
 		if (*line == '#')
+		{
+			free(line);
 			continue ;
+		}
 		else if (!parse_line(&lemin, line))
+		{
+			free(line);
 			return (0);
+		}
+		free(line);
 	}
 	print_graph(&lemin);
 	free_graph(&lemin);
