@@ -6,15 +6,13 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:35:01 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/20 14:50:51 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:12:25 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # include <libft.h>
-
-# include <stdio.h>
 
 typedef struct			s_node
 {
@@ -43,7 +41,7 @@ typedef struct			s_lemin
 	t_adjlst			*adjlst;
 }						t_lemin;
 
-
+int						ft_printf(const char *format, ...);
 t_lst					*ft_lst_push_back(t_adjlst *adjlst, unsigned long int name_hash);
 t_adjlst				*ft_adjlst_push_back(t_lemin *lemin, t_node *node);
 void					free_lst(t_adjlst *adjlst);

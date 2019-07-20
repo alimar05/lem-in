@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:51:47 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/13 16:44:26 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:14:28 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static char		is_not_link(t_adjlst *adjlst, t_lst *lst,
 static char		add_link_to_adjlst(t_lemin *lemin,
 		unsigned long int name_hash1, unsigned long int name_hash2)
 {
-	t_lst		*lst;
 	t_adjlst	*adjlst;
 
 	if (name_hash1 == name_hash2)

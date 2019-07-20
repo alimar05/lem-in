@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/20 14:51:05 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:13:32 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static void		print_graph(t_lemin *lemin)
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
-		printf("hash = %lu, x = %d, y = %d\n", buffer1->node.name_hash, buffer1->node.x, buffer1->node.y);
+		ft_printf("hash = %lu, x = %d, y = %d\n", buffer1->node.name_hash, buffer1->node.x, buffer1->node.y);
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
-			printf("hash = %lu\n", buffer2->name_hash);
+			ft_printf("hash = %lu\n", buffer2->name_hash);
 			buffer2 = buffer2->next;
 		}
 		buffer1 = buffer1->next;
