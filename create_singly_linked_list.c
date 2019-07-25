@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_linked_list.c                               :+:      :+:    :+:   */
+/*   create_singly_linked_list.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/13 12:31:03 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/13 13:33:38 by rymuller         ###   ########.fr       */
+/*   Created: 2019/07/25 13:11:28 by rymuller          #+#    #+#             */
+/*   Updated: 2019/07/25 13:30:31 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static t_lst		*ft_new_lst(unsigned long int name_hash)
 {
@@ -37,7 +37,8 @@ static t_adjlst		*ft_new_adjlst(t_node *node)
 	return (adjlst);
 }
 
-t_lst			*ft_lst_push_back(t_adjlst *adjlst, unsigned long int name_hash)
+t_lst				*ft_lst_push_back(t_adjlst *adjlst,
+		unsigned long int name_hash)
 {
 	t_lst			*buffer;
 
@@ -61,7 +62,7 @@ t_lst			*ft_lst_push_back(t_adjlst *adjlst, unsigned long int name_hash)
 	}
 }
 
-t_adjlst		*ft_adjlst_push_back(t_lemin *lemin, t_node *node)
+t_adjlst			*ft_adjlst_push_back(t_lemin *lemin, t_node *node)
 {
 	t_adjlst		*buffer;
 

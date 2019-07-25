@@ -6,11 +6,11 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:51:47 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/20 15:14:28 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/25 13:31:40 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static char		parse_link_names(char *name1, char *name2, char **line)
 {

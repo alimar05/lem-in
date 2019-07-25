@@ -6,11 +6,11 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/20 15:13:32 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/25 13:36:12 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void		initialize(t_lemin *lemin, char **line)
 {
@@ -28,7 +28,8 @@ static void		print_graph(t_lemin *lemin)
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
-		ft_printf("hash = %lu, x = %d, y = %d\n", buffer1->node.name_hash, buffer1->node.x, buffer1->node.y);
+		ft_printf("hash = %lu, x = %d, y = %d\n",
+				buffer1->node.name_hash, buffer1->node.x, buffer1->node.y);
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
@@ -39,7 +40,7 @@ static void		print_graph(t_lemin *lemin)
 	}
 }
 
-char			parse_line(t_lemin *lemin, char *line)
+static char		parse_line(t_lemin *lemin, char *line)
 {
 	if (lemin->is_ants && ft_isnumber(line))
 	{
@@ -66,7 +67,7 @@ char			parse_line(t_lemin *lemin, char *line)
 	return (1);
 }
 
-int 			main(void)
+int				main(void)
 {
 	char		*line;
 	t_lemin		lemin;

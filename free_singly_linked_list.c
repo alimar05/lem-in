@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_linked_list.c                                 :+:      :+:    :+:   */
+/*   free_singly_linked_list.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/13 12:31:21 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/13 12:31:59 by rymuller         ###   ########.fr       */
+/*   Created: 2019/07/25 13:12:13 by rymuller          #+#    #+#             */
+/*   Updated: 2019/07/25 13:30:43 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void			free_lst(t_adjlst *adjlst)
 {
-	t_lst				*victim;
+	t_lst			*victim;
 	t_lst			*buffer;
 
 	if (adjlst && adjlst->lst)
@@ -32,8 +32,8 @@ void			free_lst(t_adjlst *adjlst)
 
 void			free_adjlst(t_lemin *lemin)
 {
-	t_adjlst			*victim;
-	t_adjlst			*buffer;
+	t_adjlst		*victim;
+	t_adjlst		*buffer;
 
 	if (lemin->adjlst)
 	{
@@ -50,7 +50,7 @@ void			free_adjlst(t_lemin *lemin)
 
 void			free_graph(t_lemin *lemin)
 {
-	t_adjlst			*adjlst;
+	t_adjlst		*adjlst;
 
 	if (lemin->adjlst)
 	{

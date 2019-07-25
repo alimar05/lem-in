@@ -6,15 +6,15 @@
 #    By: rymuller <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 12:31:51 by rymuller          #+#    #+#              #
-#    Updated: 2019/07/20 15:07:45 by rymuller         ###   ########.fr        #
+#    Updated: 2019/07/25 13:30:02 by rymuller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := lem-in
 
-SRC :=	create_linked_list.c \
-		free_linked_list.c \
-		lem-in.c \
+SRC :=	create_singly_linked_list.c \
+		free_singly_linked_list.c \
+		lem_in.c \
 		parse_room.c \
 		parse_link.c 
 

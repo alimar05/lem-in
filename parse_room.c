@@ -6,28 +6,28 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:47:19 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/13 16:28:20 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/07/25 13:31:58 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 /*
- * djb2 http://www.cse.yorku.ca/~oz/hash.html
+ ** djb2 http://www.cse.yorku.ca/~oz/hash.html
 */
 
 unsigned long int	ft_hash(const char *str)
 {
 	int				c;
 	unsigned long	hash;
-	
+
 	hash = 5381;
 	while ((c = *str++))
 		hash = ((hash << 5) + hash) + c;
-	return hash;
+	return (hash);
 }
 
-static char					parse_coord(char **line, t_node *node)
+static char			parse_coord(char **line, t_node *node)
 {
 	if (**line == '\0')
 		return (0);
@@ -48,7 +48,7 @@ static char					parse_coord(char **line, t_node *node)
 	return (1);
 }
 
-static char					is_duple_room(t_lemin *lemin, t_node *node)
+static char			is_duple_room(t_lemin *lemin, t_node *node)
 {
 	t_adjlst	*adjlst;
 
@@ -67,7 +67,7 @@ static char					is_duple_room(t_lemin *lemin, t_node *node)
 	return (0);
 }
 
-char						parse_room(t_lemin *lemin, char *line)
+char				parse_room(t_lemin *lemin, char *line)
 {
 	int			i;
 	t_node		node;
