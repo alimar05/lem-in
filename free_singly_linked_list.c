@@ -42,6 +42,8 @@ void			free_adjlst(t_lemin *lemin)
 		{
 			victim = buffer;
 			buffer = victim->next;
+			if (victim->node.name)
+				free(victim->node.name);
 			free(victim);
 		}
 		lemin->adjlst = NULL;

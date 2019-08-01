@@ -28,12 +28,12 @@ static void		print_graph(t_lemin *lemin)
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
-		ft_printf("hash = %lu, x = %d, y = %d\n",
-				buffer1->node.name_hash, buffer1->node.x, buffer1->node.y);
+		ft_printf("name = %s, x = %d, y = %d\n",
+				buffer1->node.name, buffer1->node.x, buffer1->node.y);
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
-			ft_printf("link: hash = %lu, x = %d, y = %d\n", ((t_adjlst *)buffer2->adjlst)->node.name_hash, ((t_adjlst *)buffer2->adjlst)->node.x, ((t_adjlst *)buffer2->adjlst)->node.y);
+			ft_printf("link: name = %s, x = %d, y = %d\n", ((t_adjlst *)buffer2->adjlst)->node.name, ((t_adjlst *)buffer2->adjlst)->node.x, ((t_adjlst *)buffer2->adjlst)->node.y);
 			buffer2 = buffer2->next;
 		}
 		buffer1 = buffer1->next;

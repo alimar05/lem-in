@@ -12,21 +12,6 @@
 
 #include "lem_in.h"
 
-/*
- ** djb2 http://www.cse.yorku.ca/~oz/hash.html
-*/
-
-unsigned long int	ft_hash(const char *str)
-{
-	int				c;
-	unsigned long	hash;
-
-	hash = 5381;
-	while ((c = *str++))
-		hash = ((hash << 5) + hash) + c;
-	return (hash);
-}
-
 static char			parse_coord(char **line, t_node *node)
 {
 	if (**line == '\0')
@@ -57,7 +42,7 @@ static char			is_duple_room(t_lemin *lemin, t_node *node)
 		adjlst = lemin->adjlst;
 		while (adjlst)
 		{
-			if (adjlst->node.name_hash == node->name_hash)
+			if (!ft_strcmp(adjlst->node.name, node->name))
 				return (1);
 			if ((adjlst->node.x == node->x) && (adjlst->node.y == node->y))
 				return (1);
@@ -87,7 +72,7 @@ char				parse_room(t_lemin *lemin, char *line)
 			return (0);
 		if (ft_strlen(line))
 			return (0);
-		node.name_hash = ft_hash(name);
+		node.name = ft_strdup(name);
 		if (is_duple_room(lemin, &node))
 			return (0);
 		lemin->adjlst = ft_adjlst_push_back(lemin, &node);

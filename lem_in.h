@@ -16,7 +16,7 @@
 
 typedef struct			s_node
 {
-	unsigned long int	name_hash;
+	char			*name;
 	int					x;
 	int					y;
 }						t_node;

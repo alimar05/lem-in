@@ -29,7 +29,7 @@ static t_adjlst		*ft_new_adjlst(t_node *node)
 
 	if (!(adjlst = (t_adjlst *)malloc(sizeof(t_adjlst))))
 		return (NULL);
-	adjlst->node.name_hash = node->name_hash;
+	adjlst->node.name = node->name;
 	adjlst->node.x = node->x;
 	adjlst->node.y = node->y;
 	adjlst->lst = NULL;
