@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:35:01 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/25 13:19:21 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:23:36 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct			s_node
 
 typedef struct			s_lst
 {
-	unsigned long int	name_hash;
+	void				*adjlst;
 	struct s_lst		*next;
 }						t_lst;
 
@@ -42,10 +42,9 @@ typedef struct			s_lemin
 }						t_lemin;
 
 int						ft_printf(const char *format, ...);
-t_lst					*ft_lst_push_back(t_adjlst *adjlst,
-		unsigned long int name_hash);
 t_adjlst				*ft_adjlst_push_back(t_lemin *lemin, t_node *node);
-void					free_lst(t_adjlst *adjlst);
+t_lst				*ft_lst_push_back(t_lemin *lemin,
+		t_adjlst *adjlst1, t_adjlst *adjlst2);
 void					free_adjlst(t_lemin *lemin);
 char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);

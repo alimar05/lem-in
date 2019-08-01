@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/25 13:36:12 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:33:51 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		print_graph(t_lemin *lemin)
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
-			ft_printf("hash = %lu\n", buffer2->name_hash);
+			ft_printf("link: hash = %lu, x = %d, y = %d\n", ((t_adjlst *)buffer2->adjlst)->node.name_hash, ((t_adjlst *)buffer2->adjlst)->node.x, ((t_adjlst *)buffer2->adjlst)->node.y);
 			buffer2 = buffer2->next;
 		}
 		buffer1 = buffer1->next;

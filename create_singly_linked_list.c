@@ -6,19 +6,19 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 13:11:28 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/25 13:30:31 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:23:12 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_lst		*ft_new_lst(unsigned long int name_hash)
+static t_lst		*ft_new_lst(t_adjlst *adjlst)
 {
 	t_lst			*lst;
 
 	if (!(lst = (t_lst *)malloc(sizeof(t_lst))))
 		return (NULL);
-	lst->name_hash = name_hash;
+	lst->adjlst = adjlst;
 	lst->next = NULL;
 	return (lst);
 }
@@ -37,26 +37,26 @@ static t_adjlst		*ft_new_adjlst(t_node *node)
 	return (adjlst);
 }
 
-t_lst				*ft_lst_push_back(t_adjlst *adjlst,
-		unsigned long int name_hash)
+t_lst				*ft_lst_push_back(t_lemin *lemin,
+		t_adjlst *adjlst1, t_adjlst *adjlst2)
 {
 	t_lst			*buffer;
 
-	if (adjlst->lst)
+	if (adjlst1->lst)
 	{
-		buffer = adjlst->lst;
+		buffer = adjlst1->lst;
 		while (buffer->next)
 			buffer = buffer->next;
-		if (!(buffer->next = ft_new_lst(name_hash)))
+		if (!(buffer->next = ft_new_lst(adjlst2)))
 		{
-			free_lst(adjlst);
+			free_graph(lemin);
 			exit(EXIT_FAILURE);
 		}
-		return (adjlst->lst);
+		return (adjlst1->lst);
 	}
 	else
 	{
-		if (!(buffer = ft_new_lst(name_hash)))
+		if (!(buffer = ft_new_lst(adjlst2)))
 			exit(EXIT_FAILURE);
 		return (buffer);
 	}

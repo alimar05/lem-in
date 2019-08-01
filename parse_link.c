@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:51:47 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/25 13:31:40 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:34:21 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,49 +39,52 @@ static char		parse_link_names(char *name1, char *name2, char **line)
 	return (1);
 }
 
-static char		is_not_link(t_adjlst *adjlst, t_lst *lst,
+static char		add_lst_name2(t_lemin *lemin, t_adjlst *adjlst1,
 		unsigned long int name_hash2)
 {
-	while (adjlst)
+	t_lst		*lst;
+	t_adjlst	*adjlst2;
+
+	adjlst2 = lemin->adjlst;
+	while (adjlst2)
 	{
-		if (adjlst->node.name_hash == name_hash2)
+		if (adjlst2->node.name_hash == name_hash2)
 		{
+			lst = adjlst1->lst;
 			while (lst)
 			{
-				if (lst->name_hash == name_hash2)
-					return (1);
+				if (((t_adjlst *)lst->adjlst)->node.name_hash == name_hash2)
+					return (0);
 				lst = lst->next;
 			}
-			return (0);
+			adjlst1->lst = ft_lst_push_back(lemin, adjlst1, adjlst2);
+			return (1);
 		}
-		adjlst = adjlst->next;
+		adjlst2 = adjlst2->next;
 	}
-	return (1);
+	return (0);
 }
 
-static char		add_link_to_adjlst(t_lemin *lemin,
+static char		add_link_name1_name2(t_lemin *lemin,
 		unsigned long int name_hash1, unsigned long int name_hash2)
 {
-	t_adjlst	*adjlst;
+	t_adjlst	*adjlst1;
 
 	if (name_hash1 == name_hash2)
 		return (0);
 	else if (lemin->adjlst)
 	{
-		adjlst = lemin->adjlst;
-		while (adjlst)
+		adjlst1 = lemin->adjlst;
+		while (adjlst1)
 		{
-			if (adjlst->node.name_hash == name_hash1)
+			if (adjlst1->node.name_hash == name_hash1)
 			{
-				if (is_not_link(lemin->adjlst, adjlst->lst, name_hash2))
-					return (0);
-				else
-				{
-					adjlst->lst = ft_lst_push_back(adjlst, name_hash2);
+				if (add_lst_name2(lemin, adjlst1, name_hash2))
 					return (1);
-				}
+				else
+					return (0);
 			}
-			adjlst = adjlst->next;
+			adjlst1 = adjlst1->next;
 		}
 	}
 	return (0);
@@ -102,7 +105,7 @@ char			parse_link(t_lemin *lemin, char *line)
 			return (0);
 		if (ft_strlen(line))
 			return (0);
-		if (!add_link_to_adjlst(lemin, ft_hash(name1), ft_hash(name2)))
+		if (!add_link_name1_name2(lemin, ft_hash(name1), ft_hash(name2)))
 			return (0);
 		return (1);
 	}

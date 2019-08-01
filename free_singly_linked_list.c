@@ -6,13 +6,13 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 13:12:13 by rymuller          #+#    #+#             */
-/*   Updated: 2019/07/25 13:30:43 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:07:37 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void			free_lst(t_adjlst *adjlst)
+static void		free_lst(t_adjlst *adjlst)
 {
 	t_lst			*victim;
 	t_lst			*buffer;
