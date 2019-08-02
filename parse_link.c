@@ -97,8 +97,6 @@ char			parse_link(t_lemin *lemin, char *line)
 		return (0);
 	else
 	{
-		while (*line == ' ' || *line == '\t')
-			line++;
 		if (!parse_link_names(name1, name2, &line))
 			return (0);
 		if (ft_strlen(line))

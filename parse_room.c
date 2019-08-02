@@ -62,8 +62,6 @@ char				parse_room(t_lemin *lemin, char *line)
 		return (0);
 	else
 	{
-		while (*line == ' ' || *line == '\t')
-			line++;
 		i = 0;
 		while (*line && *line != ' ' && *line != '\t')
 			*(name + i++) = *line++;

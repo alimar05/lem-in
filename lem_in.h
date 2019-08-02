@@ -50,4 +50,5 @@ char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);
 unsigned long int		ft_hash(const char *str);
 void					free_graph(t_lemin *lemin);
+# define ERROR(lemin) free_graph(lemin); write(2, "ERROR\n", 6); return (0)
 #endif
