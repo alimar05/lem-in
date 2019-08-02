@@ -38,7 +38,12 @@ typedef struct			s_lemin
 {
 	int					number_of_ants;
 	unsigned int		is_ants:1;
+	unsigned int		is_start:1;
+	unsigned int		is_end:1;
 	t_adjlst			*adjlst;
+	t_adjlst			*start;
+	t_adjlst			*end;
+	t_adjlst			*buffer;
 }						t_lemin;
 
 int						ft_printf(const char *format, ...);
@@ -48,7 +53,6 @@ t_lst				*ft_lst_push_back(t_lemin *lemin,
 void					free_adjlst(t_lemin *lemin);
 char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);
-unsigned long int		ft_hash(const char *str);
 void					free_graph(t_lemin *lemin);
 # define ERROR(lemin) free_graph(lemin); write(2, "ERROR\n", 6); return (0)
 #endif

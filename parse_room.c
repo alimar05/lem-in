@@ -52,6 +52,48 @@ static char			is_duple_room(t_lemin *lemin, t_node *node)
 	return (0);
 }
 
+static char			is_start_or_end(t_lemin *lemin, char *line)
+{
+	if (lemin->is_ants)
+	{
+		if (lemin->start == NULL)
+		{
+			if (!ft_strcmp("##start", line))
+			{
+				lemin->is_start = 1;
+				return (1);
+			}
+		}
+		if (lemin->end == NULL)
+		{
+			if (!ft_strcmp("##end", line))
+			{
+				lemin->is_end = 1;
+				return (1);
+			}
+		}
+	}
+	return (0);
+}
+
+static char			add_room_to_adjlst(t_lemin *lemin, t_node *node)
+{
+	if (is_duple_room(lemin, node))
+		return (0);
+	lemin->adjlst = ft_adjlst_push_back(lemin, node);
+	if (lemin->is_start)
+	{
+		lemin->start = lemin->buffer;
+		lemin->is_start = 0;
+	}
+	if (lemin->is_end)
+	{
+		lemin->end = lemin->buffer;
+		lemin->is_end = 0;
+	}
+	return (1);
+}
+
 char				parse_room(t_lemin *lemin, char *line)
 {
 	int			i;
@@ -62,18 +104,20 @@ char				parse_room(t_lemin *lemin, char *line)
 		return (0);
 	else
 	{
-		i = 0;
-		while (*line && *line != ' ' && *line != '\t')
-			*(name + i++) = *line++;
-		*(name + i) = '\0';
-		if (!parse_coord(&line, &node))
-			return (0);
-		if (ft_strlen(line))
-			return (0);
-		node.name = ft_strdup(name);
-		if (is_duple_room(lemin, &node))
-			return (0);
-		lemin->adjlst = ft_adjlst_push_back(lemin, &node);
+		if (!is_start_or_end(lemin, line))
+		{
+			i = 0;
+			while (*line && *line != ' ' && *line != '\t')
+				*(name + i++) = *line++;
+			*(name + i) = '\0';
+			if (!parse_coord(&line, &node))
+				return (0);
+			if (ft_strlen(line))
+				return (0);
+			node.name = ft_strdup(name);
+			if (!add_room_to_adjlst(lemin, &node))
+				return (0);
+		}
 		return (1);
 	}
 }

@@ -15,9 +15,13 @@
 static void		initialize(t_lemin *lemin, char **line)
 {
 	*line = NULL;
-	lemin->is_ants = 1;
+	lemin->is_ants = 0;
+	lemin->is_start = 0;
+	lemin->is_end = 0;
 	lemin->number_of_ants = 0;
 	lemin->adjlst = NULL;
+	lemin->start = NULL;
+	lemin->end = NULL;
 }
 
 static void		print_graph(t_lemin *lemin)
@@ -25,6 +29,14 @@ static void		print_graph(t_lemin *lemin)
 	t_adjlst	*buffer1;
 	t_lst		*buffer2;
 
+	ft_printf(">>> start: name = %s, x = %d, y = %d\n",
+			lemin->start->node.name,
+			lemin->start->node.x,
+			lemin->start->node.y);
+	ft_printf("<<< end: name = %s, x = %d, y = %d\n",
+			lemin->end->node.name,
+			lemin->end->node.x,
+			lemin->end->node.y);
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
@@ -35,7 +47,7 @@ static void		print_graph(t_lemin *lemin)
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
-			ft_printf("link: name = %s, x = %d, y = %d\n",
+			ft_printf("\tlink: name = %s, x = %d, y = %d\n",
 					((t_adjlst *)buffer2->adjlst)->node.name,
 					((t_adjlst *)buffer2->adjlst)->node.x,
 					((t_adjlst *)buffer2->adjlst)->node.y);
@@ -47,14 +59,14 @@ static void		print_graph(t_lemin *lemin)
 
 static char		parse_line(t_lemin *lemin, char *line)
 {
-	if (*line == ' ' || *line == '\t')
+	if (*line == ' ' || *line == '\t' || *line == '\0')
 	{
 		ERROR(lemin);
 	}
-	else if (lemin->is_ants && ft_isnumber(line))
+	else if (!lemin->is_ants && ft_isnumber(line))
 	{
 		lemin->number_of_ants = ft_atoi(line);
-		lemin->is_ants = 0;
+		lemin->is_ants = 1;
 	}
 	else if (!parse_room(lemin, line))
 	{
@@ -81,7 +93,7 @@ int				main(void)
 	initialize(&lemin, &line);
 	while (get_next_line(0, &line))
 	{
-		if (*line == '#')
+		if (*line == '#' && *(line + 1) != '#')
 		{
 			free(line);
 			continue ;
@@ -92,6 +104,10 @@ int				main(void)
 			return (0);
 		}
 		free(line);
+	}
+	if (lemin.start == NULL || lemin.end == NULL)
+	{
+		ERROR(&lemin);
 	}
 	print_graph(&lemin);
 	free_graph(&lemin);

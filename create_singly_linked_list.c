@@ -76,12 +76,14 @@ t_adjlst			*ft_adjlst_push_back(t_lemin *lemin, t_node *node)
 			free_adjlst(lemin);
 			exit(EXIT_FAILURE);
 		}
+		lemin->buffer = buffer->next;
 		return (lemin->adjlst);
 	}
 	else
 	{
 		if (!(buffer = ft_new_adjlst(node)))
 			exit(EXIT_FAILURE);
+		lemin->buffer = buffer;
 		return (buffer);
 	}
 }
