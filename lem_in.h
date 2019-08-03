@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:35:01 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/01 16:23:36 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/03 12:59:44 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 typedef struct			s_node
 {
-	char			*name;
+	char				*name;
 	int					x;
 	int					y;
 }						t_node;
@@ -48,7 +48,7 @@ typedef struct			s_lemin
 
 int						ft_printf(const char *format, ...);
 t_adjlst				*ft_adjlst_push_back(t_lemin *lemin, t_node *node);
-t_lst				*ft_lst_push_back(t_lemin *lemin,
+t_lst					*ft_lst_push_back(t_lemin *lemin,
 		t_adjlst *adjlst1, t_adjlst *adjlst2);
 void					free_adjlst(t_lemin *lemin);
 char					parse_room(t_lemin *lemin, char *line);

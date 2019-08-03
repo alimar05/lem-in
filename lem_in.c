@@ -6,11 +6,12 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/01 16:33:51 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/03 14:30:47 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <stdio.h>
 
 static void		initialize(t_lemin *lemin, char **line)
 {
@@ -29,25 +30,25 @@ static void		print_graph(t_lemin *lemin)
 	t_adjlst	*buffer1;
 	t_lst		*buffer2;
 
-	ft_printf(">>> start: name = %s, x = %d, y = %d\n",
+	printf(">>> start: name = %s, x = %d, y = %d\n",
 			lemin->start->node.name,
 			lemin->start->node.x,
 			lemin->start->node.y);
-	ft_printf("<<< end: name = %s, x = %d, y = %d\n",
+	printf("<<< end: name = %s, x = %d, y = %d\n",
 			lemin->end->node.name,
 			lemin->end->node.x,
 			lemin->end->node.y);
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
-		ft_printf("name = %s, x = %d, y = %d\n",
+		printf("room: name = %s, x = %d, y = %d\n",
 				buffer1->node.name,
 				buffer1->node.x,
 				buffer1->node.y);
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
-			ft_printf("\tlink: name = %s, x = %d, y = %d\n",
+			printf("  link: name = %s, x = %d, y = %d\n",
 					((t_adjlst *)buffer2->adjlst)->node.name,
 					((t_adjlst *)buffer2->adjlst)->node.x,
 					((t_adjlst *)buffer2->adjlst)->node.y);
@@ -85,6 +86,30 @@ static char		parse_line(t_lemin *lemin, char *line)
 	return (1);
 }
 
+static char		is_all_links_to_rooms(t_lemin *lemin)
+{
+	t_adjlst	*adjlst;
+
+	if (lemin->adjlst)
+	{
+		adjlst = lemin->adjlst;
+		while (adjlst)
+		{
+			if (adjlst->lst == NULL)
+			{
+				ERROR(lemin);
+			}
+			adjlst = adjlst->next;
+		}
+	}
+	if (lemin->start == lemin->end
+			|| lemin->start == NULL || lemin->end == NULL)
+	{
+		ERROR(lemin);
+	}
+	return (1);
+}
+
 int				main(void)
 {
 	char		*line;
@@ -105,10 +130,8 @@ int				main(void)
 		}
 		free(line);
 	}
-	if (lemin.start == NULL || lemin.end == NULL)
-	{
-		ERROR(&lemin);
-	}
+	if (!is_all_links_to_rooms(&lemin))
+		return (0);
 	print_graph(&lemin);
 	free_graph(&lemin);
 	return (0);
