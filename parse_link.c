@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:51:47 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/01 16:34:21 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/08 13:48:59 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static char		add_lst_name2(t_lemin *lemin, t_adjlst *adjlst1, char *name2)
 				lst = lst->next;
 			}
 			adjlst1->lst = ft_lst_push_back(lemin, adjlst1, adjlst2);
+			adjlst2->lst = ft_lst_push_back(lemin, adjlst2, adjlst1);
 			return (1);
 		}
 		adjlst2 = adjlst2->next;
