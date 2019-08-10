@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:35:01 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/03 12:59:44 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/10 11:46:16 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct			s_adjlst
 {
 	t_node				node;
 	t_lst				*lst;
+	int					level;
+	unsigned int		visited:1;
 	struct s_adjlst		*next;
 }						t_adjlst;
 

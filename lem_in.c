@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/08 13:49:29 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/10 14:32:24 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,32 @@ static void		print_graph(t_lemin *lemin)
 	t_adjlst	*buffer1;
 	t_lst		*buffer2;
 
-	printf(">>> start: name = %s, x = %d, y = %d\n",
+	printf(">>> start: name = %s, x = %d, y = %d, level = %d\n",
 			lemin->start->node.name,
 			lemin->start->node.x,
-			lemin->start->node.y);
-	printf("<<< end: name = %s, x = %d, y = %d\n",
+			lemin->start->node.y,
+			lemin->start->level);
+	printf("<<< end: name = %s, x = %d, y = %d, level = %d\n",
 			lemin->end->node.name,
 			lemin->end->node.x,
-			lemin->end->node.y);
+			lemin->end->node.y,
+			lemin->end->level);
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
-		printf("room: name = %s, x = %d, y = %d\n",
+		printf("room: name = %s, x = %d, y = %d, level = %d\n",
 				buffer1->node.name,
 				buffer1->node.x,
-				buffer1->node.y);
+				buffer1->node.y,
+				buffer1->level);
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
-			printf("  link: name = %s, x = %d, y = %d\n",
+			printf("  link: name = %s, x = %d, y = %d, level = %d\n",
 					((t_adjlst *)buffer2->adjlst)->node.name,
 					((t_adjlst *)buffer2->adjlst)->node.x,
-					((t_adjlst *)buffer2->adjlst)->node.y);
+					((t_adjlst *)buffer2->adjlst)->node.y,
+					((t_adjlst *)buffer2->adjlst)->level);
 			buffer2 = buffer2->next;
 		}
 		buffer1 = buffer1->next;

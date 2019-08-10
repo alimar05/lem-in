@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 13:11:28 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/01 16:23:12 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/10 11:46:52 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static t_adjlst		*ft_new_adjlst(t_node *node)
 	adjlst->node.y = node->y;
 	adjlst->lst = NULL;
 	adjlst->next = NULL;
+	adjlst->level = 0;
+	adjlst->visited = 0;
 	return (adjlst);
 }
 
