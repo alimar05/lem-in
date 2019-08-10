@@ -6,13 +6,13 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 13:11:28 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/10 11:46:52 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/10 15:49:25 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_lst		*ft_new_lst(t_adjlst *adjlst)
+t_lst				*ft_new_lst(t_adjlst *adjlst)
 {
 	t_lst			*lst;
 

@@ -6,7 +6,7 @@
 #    By: rymuller <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 12:31:51 by rymuller          #+#    #+#              #
-#    Updated: 2019/08/08 14:19:34 by rymuller         ###   ########.fr        #
+#    Updated: 2019/08/10 17:27:07 by rymuller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC :=	create_singly_linked_list.c \
 		free_singly_linked_list.c \
 		lem_in.c \
 		parse_room.c \
-		parse_link.c 
+		parse_link.c \
+		queue.c
 
 CFLAGS := -Wall -Wextra -Werror
 HEADER := -I./libft/includes

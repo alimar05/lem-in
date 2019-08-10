@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/10 14:32:24 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:24:43 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void		initialize(t_lemin *lemin, char **line)
 	lemin->adjlst = NULL;
 	lemin->start = NULL;
 	lemin->end = NULL;
+	lemin->queue = NULL;
 }
 
 static void		print_graph(t_lemin *lemin)
@@ -43,6 +44,7 @@ static void		print_graph(t_lemin *lemin)
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
+		lemin->queue = ft_push_queue(lemin, buffer1);
 		printf("room: name = %s, x = %d, y = %d, level = %d\n",
 				buffer1->node.name,
 				buffer1->node.x,

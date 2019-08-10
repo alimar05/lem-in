@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:35:01 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/10 11:46:16 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/10 16:39:52 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,19 @@ typedef struct			s_lemin
 	t_adjlst			*start;
 	t_adjlst			*end;
 	t_adjlst			*buffer;
+	t_lst				*queue;
 }						t_lemin;
 
 int						ft_printf(const char *format, ...);
 t_adjlst				*ft_adjlst_push_back(t_lemin *lemin, t_node *node);
+t_lst					*ft_new_lst(t_adjlst *adjlst);
 t_lst					*ft_lst_push_back(t_lemin *lemin,
 		t_adjlst *adjlst1, t_adjlst *adjlst2);
 void					free_adjlst(t_lemin *lemin);
 char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);
 void					free_graph(t_lemin *lemin);
+t_lst					*ft_push_queue(t_lemin *lemin, t_adjlst *adjlst);
+void					ft_pop_queue(t_lemin *lemin);
 # define ERROR(lemin) free_graph(lemin); write(2, "ERROR\n", 6); return (0)
 #endif
