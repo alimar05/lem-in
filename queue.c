@@ -30,7 +30,7 @@ static void			free_queue(t_lemin *lemin)
 	}
 }
 
-t_lst				*ft_push_queue(t_lemin *lemin, t_adjlst *adjlst)
+void				ft_push_queue(t_lemin *lemin, t_adjlst *adjlst)
 {
 	t_lst			*buffer;
 
@@ -44,13 +44,12 @@ t_lst				*ft_push_queue(t_lemin *lemin, t_adjlst *adjlst)
 			free_queue(lemin);
 			exit(EXIT_FAILURE);
 		}
-		return (lemin->queue);
 	}
 	else
 	{
 		if (!(buffer = ft_new_lst(adjlst)))
 			exit(EXIT_FAILURE);
-		return (buffer);
+		lemin->queue = buffer;
 	}
 }
 

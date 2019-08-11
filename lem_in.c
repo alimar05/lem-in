@@ -24,6 +24,7 @@ static void		initialize(t_lemin *lemin, char **line)
 	lemin->start = NULL;
 	lemin->end = NULL;
 	lemin->queue = NULL;
+	lemin->level = 0;
 }
 
 static void		print_graph(t_lemin *lemin)
@@ -31,33 +32,36 @@ static void		print_graph(t_lemin *lemin)
 	t_adjlst	*buffer1;
 	t_lst		*buffer2;
 
-	printf(">>> start: name = %s, x = %d, y = %d, level = %d\n",
+	printf(">>> start: name = %s, x = %d, y = %d, level = %d, visited = %d\n",
 			lemin->start->node.name,
 			lemin->start->node.x,
 			lemin->start->node.y,
-			lemin->start->level);
-	printf("<<< end: name = %s, x = %d, y = %d, level = %d\n",
+			lemin->start->level,
+			lemin->start->visited);
+	printf("<<< end: name = %s, x = %d, y = %d, level = %d, visited = %d\n",
 			lemin->end->node.name,
 			lemin->end->node.x,
 			lemin->end->node.y,
-			lemin->end->level);
+			lemin->end->level,
+			lemin->end->visited);
 	buffer1 = lemin->adjlst;
 	while (buffer1)
 	{
-		lemin->queue = ft_push_queue(lemin, buffer1);
-		printf("room: name = %s, x = %d, y = %d, level = %d\n",
+		printf("room: name = %s, x = %d, y = %d, level = %d, visited = %d\n",
 				buffer1->node.name,
 				buffer1->node.x,
 				buffer1->node.y,
-				buffer1->level);
+				buffer1->level,
+				buffer1->visited);
 		buffer2 = buffer1->lst;
 		while (buffer2)
 		{
-			printf("  link: name = %s, x = %d, y = %d, level = %d\n",
+			printf("  link: name = %s, x = %d, y = %d, level = %d, visited = %d\n",
 					((t_adjlst *)buffer2->adjlst)->node.name,
 					((t_adjlst *)buffer2->adjlst)->node.x,
 					((t_adjlst *)buffer2->adjlst)->node.y,
-					((t_adjlst *)buffer2->adjlst)->level);
+					((t_adjlst *)buffer2->adjlst)->level,
+					((t_adjlst *)buffer2->adjlst)->visited);
 			buffer2 = buffer2->next;
 		}
 		buffer1 = buffer1->next;
@@ -116,6 +120,32 @@ static char		is_all_links_to_rooms(t_lemin *lemin)
 	return (1);
 }
 
+static void		add_neighbors_adjlst_to_queue(t_lemin *lemin)
+{
+	t_lst		*buffer;
+
+	buffer = ((t_adjlst *)lemin->queue->adjlst)->lst;
+	while (buffer)
+	{
+		ft_push_queue(lemin, buffer->adjlst);
+		buffer = buffer->next;
+	}
+}
+
+void			breadth_first_search_to_start(t_lemin *lemin)
+{
+	ft_push_queue(lemin, lemin->end);
+	while (lemin->queue)
+	{
+		if (!(((t_adjlst *)lemin->queue->adjlst)->visited))
+		{
+			add_neighbors_adjlst_to_queue(lemin);
+			((t_adjlst *)lemin->queue->adjlst)->visited = 1;
+		}
+		ft_pop_queue(lemin);
+	}
+}
+
 int				main(void)
 {
 	char		*line;
@@ -138,6 +168,7 @@ int				main(void)
 	}
 	if (!is_all_links_to_rooms(&lemin))
 		return (0);
+	breadth_first_search_to_start(&lemin);
 	print_graph(&lemin);
 	free_graph(&lemin);
 	return (0);

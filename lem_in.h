@@ -13,6 +13,7 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # include <libft.h>
+# define MAX_INT 2147483647
 
 typedef struct			s_node
 {
@@ -39,6 +40,7 @@ typedef struct			s_adjlst
 typedef struct			s_lemin
 {
 	int					number_of_ants;
+	int			level;
 	unsigned int		is_ants:1;
 	unsigned int		is_start:1;
 	unsigned int		is_end:1;
@@ -58,7 +60,7 @@ void					free_adjlst(t_lemin *lemin);
 char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);
 void					free_graph(t_lemin *lemin);
-t_lst					*ft_push_queue(t_lemin *lemin, t_adjlst *adjlst);
+void					ft_push_queue(t_lemin *lemin, t_adjlst *adjlst);
 void					ft_pop_queue(t_lemin *lemin);
 # define ERROR(lemin) free_graph(lemin); write(2, "ERROR\n", 6); return (0)
 #endif
