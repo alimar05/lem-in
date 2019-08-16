@@ -40,7 +40,6 @@ typedef struct			s_adjlst
 typedef struct			s_lemin
 {
 	int					number_of_ants;
-	int			level;
 	unsigned int		is_ants:1;
 	unsigned int		is_start:1;
 	unsigned int		is_end:1;
@@ -62,5 +61,7 @@ char					parse_link(t_lemin *lemin, char *line);
 void					free_graph(t_lemin *lemin);
 void					ft_push_queue(t_lemin *lemin, t_adjlst *adjlst);
 void					ft_pop_queue(t_lemin *lemin);
+char					not_in_queue(t_lemin *lemin, t_adjlst *adjlst);
+void					breadth_first_search_to_start(t_lemin *lemin);
 # define ERROR(lemin) free_graph(lemin); write(2, "ERROR\n", 6); return (0)
 #endif

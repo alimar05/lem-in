@@ -34,7 +34,7 @@ static t_adjlst		*ft_new_adjlst(t_node *node)
 	adjlst->node.y = node->y;
 	adjlst->lst = NULL;
 	adjlst->next = NULL;
-	adjlst->level = MAX_INT;
+	adjlst->level = 0;
 	adjlst->visited = 0;
 	return (adjlst);
 }

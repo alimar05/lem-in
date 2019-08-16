@@ -17,7 +17,8 @@ SRC :=	create_singly_linked_list.c \
 		lem_in.c \
 		parse_room.c \
 		parse_link.c \
-		queue.c
+		queue.c \
+		breadth_first_search.c
 
 CFLAGS := -Wall -Wextra -Werror
 HEADER := -I./libft/includes

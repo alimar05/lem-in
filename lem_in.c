@@ -24,7 +24,6 @@ static void		initialize(t_lemin *lemin, char **line)
 	lemin->start = NULL;
 	lemin->end = NULL;
 	lemin->queue = NULL;
-	lemin->level = 0;
 }
 
 static void		print_graph(t_lemin *lemin)
@@ -120,33 +119,7 @@ static char		is_all_links_to_rooms(t_lemin *lemin)
 	return (1);
 }
 
-static void		add_neighbors_adjlst_to_queue(t_lemin *lemin)
-{
-	t_lst		*buffer;
-
-	buffer = ((t_adjlst *)lemin->queue->adjlst)->lst;
-	while (buffer)
-	{
-		ft_push_queue(lemin, buffer->adjlst);
-		buffer = buffer->next;
-	}
-}
-
-void			breadth_first_search_to_start(t_lemin *lemin)
-{
-	ft_push_queue(lemin, lemin->end);
-	while (lemin->queue)
-	{
-		if (!(((t_adjlst *)lemin->queue->adjlst)->visited))
-		{
-			add_neighbors_adjlst_to_queue(lemin);
-			((t_adjlst *)lemin->queue->adjlst)->visited = 1;
-		}
-		ft_pop_queue(lemin);
-	}
-}
-
-int				main(void)
+int			main(void)
 {
 	char		*line;
 	t_lemin		lemin;

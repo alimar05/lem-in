@@ -67,3 +67,19 @@ void				ft_pop_queue(t_lemin *lemin)
 		free(buffer);
 	}
 }
+
+char			not_in_queue(t_lemin *lemin, t_adjlst *adjlst)
+{
+	t_lst		*buffer;
+
+	if (adjlst == NULL)
+		return (0);
+	buffer = lemin->queue;
+	while (buffer)
+	{
+		if (adjlst == buffer->adjlst)
+			return (0);
+		buffer = buffer->next;
+	}
+	return (1);
+}
