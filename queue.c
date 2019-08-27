@@ -42,13 +42,17 @@ void				ft_push_queue(t_lemin *lemin, t_adjlst *adjlst)
 		if (!(buffer->next = ft_new_lst(adjlst)))
 		{
 			free_queue(lemin);
+			free_graph(lemin);
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		if (!(buffer = ft_new_lst(adjlst)))
+		{
+			free_graph(lemin);
 			exit(EXIT_FAILURE);
+		}
 		lemin->queue = buffer;
 	}
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <fcntl.h>
 #include <stdio.h>
 
 static void		initialize(t_lemin *lemin, char **line)
@@ -24,6 +25,9 @@ static void		initialize(t_lemin *lemin, char **line)
 	lemin->start = NULL;
 	lemin->end = NULL;
 	lemin->queue = NULL;
+	lemin->stack = NULL;
+	lemin->paths = NULL;
+	lemin->last_path = NULL;
 }
 
 static void		print_graph(t_lemin *lemin)
@@ -66,7 +70,31 @@ static void		print_graph(t_lemin *lemin)
 		buffer1 = buffer1->next;
 	}
 }
+/*
+static void		print_paths(t_lemin *lemin)
+{
+	t_path		*buffer1;
+	t_lst		*buffer2;
 
+	buffer1 = lemin->paths;
+	while (buffer1)
+	{
+		printf("path: name = %s, level = %d, path_len = %d\n",
+				buffer1->start->node.name,
+				buffer1->start->level,
+				buffer1->path_len);
+		buffer2 = buffer1->lst;
+		while (buffer2)
+		{
+			printf("    room: name = %s, level = %d\n",
+					((t_adjlst *)buffer2->adjlst)->node.name,
+					((t_adjlst *)buffer2->adjlst)->level);
+			buffer2 = buffer2->next;
+		}
+		buffer1 = buffer1->next;
+	}
+}
+*/
 static char		parse_line(t_lemin *lemin, char *line)
 {
 	if (*line == ' ' || *line == '\t' || *line == '\0')
@@ -121,11 +149,13 @@ static char		is_all_links_to_rooms(t_lemin *lemin)
 
 int			main(void)
 {
+	int		fd;
 	char		*line;
 	t_lemin		lemin;
 
 	initialize(&lemin, &line);
-	while (get_next_line(0, &line))
+	fd = open("maps/example3.map", O_RDONLY);
+	while (get_next_line(fd, &line))
 	{
 		if (*line == '#' && *(line + 1) != '#')
 		{
@@ -142,6 +172,10 @@ int			main(void)
 	if (!is_all_links_to_rooms(&lemin))
 		return (0);
 	breadth_first_search_to_start(&lemin);
+	print_graph(&lemin);
+//	print_paths(&lemin);
+	printf("================\n");
+	depth_first_search_to_end(&lemin);
 	print_graph(&lemin);
 	free_graph(&lemin);
 	return (0);

@@ -50,6 +50,25 @@ void			free_adjlst(t_lemin *lemin)
 	}
 }
 
+void			del_lst(t_lst **lst, t_adjlst *adjlst)
+{
+	t_lst				*victim;
+	t_lst				**buffer;
+
+	buffer = lst;
+	while (*buffer)
+	{
+		if ((*buffer)->adjlst == adjlst)
+		{
+			victim = *buffer;
+			*buffer = victim->next;
+			free(victim);
+		}
+		else
+			buffer = &((*buffer)->next);
+	}
+}
+
 void			free_graph(t_lemin *lemin)
 {
 	t_adjlst		*adjlst;
@@ -65,4 +84,17 @@ void			free_graph(t_lemin *lemin)
 		}
 		free_adjlst(lemin);
 	}
+/*
+	if (lemin->paths)
+	{
+		adjlst = lemin->adjlst;
+		while (adjlst)
+		{
+			if (adjlst->lst)
+				free_lst(adjlst);
+			adjlst = adjlst->next;
+		}
+		free_adjlst(lemin);
+	}
+*/
 }

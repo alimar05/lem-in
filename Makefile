@@ -18,9 +18,12 @@ SRC :=	create_singly_linked_list.c \
 		parse_room.c \
 		parse_link.c \
 		queue.c \
-		breadth_first_search.c
+		stack.c \
+		breadth_first_search.c \
+		depth_first_search.c \
+		find_path_in_graph.c
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -g -O0 -Wall -Wextra -Werror
 HEADER := -I./libft/includes
 LIB := -L./libft -lft -L./ft_printf -lftprintf
 
