@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 13:11:28 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/10 15:49:25 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:55:19 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static t_adjlst		*ft_new_adjlst(t_node *node)
 	adjlst->lst = NULL;
 	adjlst->next = NULL;
 	adjlst->level = 0;
-	adjlst->visited = 0;
+	adjlst->visited_bfs = 0;
+	adjlst->visited_pth = 0;
 	return (adjlst);
 }
 
@@ -59,7 +60,10 @@ t_lst				*ft_lst_push_back(t_lemin *lemin,
 	else
 	{
 		if (!(buffer = ft_new_lst(adjlst2)))
+		{
+			free_graph(lemin);
 			exit(EXIT_FAILURE);
+		}
 		return (buffer);
 	}
 }
@@ -84,7 +88,10 @@ t_adjlst			*ft_adjlst_push_back(t_lemin *lemin, t_node *node)
 	else
 	{
 		if (!(buffer = ft_new_adjlst(node)))
+		{
+			free_graph(lemin);
 			exit(EXIT_FAILURE);
+		}
 		lemin->buffer = buffer;
 		return (buffer);
 	}

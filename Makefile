@@ -6,7 +6,7 @@
 #    By: rymuller <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 12:31:51 by rymuller          #+#    #+#              #
-#    Updated: 2019/08/10 17:27:07 by rymuller         ###   ########.fr        #
+#    Updated: 2019/08/29 14:05:03 by rymuller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,7 @@ SRC :=	create_singly_linked_list.c \
 		parse_room.c \
 		parse_link.c \
 		queue.c \
-		stack.c \
 		breadth_first_search.c \
-		depth_first_search.c \
 		find_path_in_graph.c
 
 CFLAGS := -g -O0 -Wall -Wextra -Werror

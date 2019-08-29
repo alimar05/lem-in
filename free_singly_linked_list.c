@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 13:12:13 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/01 16:07:37 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/30 12:56:05 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,43 @@ void			free_adjlst(t_lemin *lemin)
 	}
 }
 
-void			del_lst(t_lst **lst, t_adjlst *adjlst)
+void			free_path_lst(t_lst *path_lst)
 {
-	t_lst				*victim;
-	t_lst				**buffer;
+	t_lst			*victim;
+	t_lst			*buffer;
 
-	buffer = lst;
-	while (*buffer)
+	if (path_lst)
 	{
-		if ((*buffer)->adjlst == adjlst)
+		buffer = path_lst;
+		while (buffer)
 		{
-			victim = *buffer;
-			*buffer = victim->next;
+			victim = buffer;
+			buffer = victim->next;
 			free(victim);
 		}
-		else
-			buffer = &((*buffer)->next);
+	}
+}
+
+void			free_paths(t_lemin *lemin)
+{
+	t_path			*victim;
+	t_path			*buffer;
+
+	if (lemin->paths)
+	{
+		buffer = lemin->paths;
+		while (buffer)
+		{
+			victim = buffer;
+			buffer = victim->next;
+			free(victim);
+		}
 	}
 }
 
 void			free_graph(t_lemin *lemin)
 {
+	t_path			*path;
 	t_adjlst		*adjlst;
 
 	if (lemin->adjlst)
@@ -84,17 +100,15 @@ void			free_graph(t_lemin *lemin)
 		}
 		free_adjlst(lemin);
 	}
-/*
 	if (lemin->paths)
 	{
-		adjlst = lemin->adjlst;
-		while (adjlst)
+		path = lemin->paths;
+		while (path)
 		{
-			if (adjlst->lst)
-				free_lst(adjlst);
-			adjlst = adjlst->next;
+			if (path->path_lst)
+				free_path_lst(path->path_lst);
+			path = path->next;
 		}
-		free_adjlst(lemin);
+		free_paths(lemin);
 	}
-*/
 }

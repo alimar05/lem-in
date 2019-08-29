@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 15:14:32 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/10 17:07:20 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/08/30 12:57:10 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void				ft_pop_queue(t_lemin *lemin)
 	}
 }
 
-char			not_in_queue(t_lemin *lemin, t_adjlst *adjlst)
+char				not_in_queue(t_lemin *lemin, t_adjlst *adjlst)
 {
-	t_lst		*buffer;
+	t_lst			*buffer;
 
 	if (adjlst == NULL)
 		return (0);
