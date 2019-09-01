@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:35:01 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/31 14:44:26 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:23:09 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct			s_adjlst
 typedef struct			s_path
 {
 	t_adjlst			*start;
-	t_lst				*path_lst;
+	t_lst				*path_lst[2];
 	int					path_len;
 	struct s_path		*next;
 }						t_path;
@@ -66,7 +66,7 @@ t_lst					*ft_new_lst(t_adjlst *adjlst);
 t_lst					*ft_lst_push_back(t_lemin *lemin,
 		t_adjlst *adjlst1, t_adjlst *adjlst2);
 void					free_adjlst(t_lemin *lemin);
-void					free_path_lst(t_lst *path_lst);
+void					free_path_lst(t_lst *path_lst[2]);
 char					parse_room(t_lemin *lemin, char *line);
 char					parse_link(t_lemin *lemin, char *line);
 void					free_graph(t_lemin *lemin);

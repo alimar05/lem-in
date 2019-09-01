@@ -6,34 +6,35 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 11:31:48 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/31 16:34:48 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:07:46 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 static t_path		*ft_new_path_lst(t_adjlst *adjlst,
-		t_lst *path_lst, int path_len)
+		t_lst *path_lst[2], int path_len)
 {
 	t_path			*path;
 
 	if (!(path = (t_path *)malloc(sizeof(t_path))))
 		return (NULL);
 	path->start = adjlst;
-	path->path_lst = path_lst;
+	path->path_lst[0] = path_lst[0];
+	path->path_lst[1] = path_lst[1];
 	path->path_len = path_len;
 	path->next = NULL;
 	return (path);
 }
 
-static t_lst		*ft_path_lst_push_back(t_lemin *lemin,
-		t_lst *path_lst, t_adjlst *adjlst)
+static void			ft_path_lst_push_back(t_lemin *lemin,
+		t_lst *path_lst[2], t_adjlst *adjlst)
 {
 	t_lst			*buffer;
 
-	if (path_lst)
+	if (path_lst[0])
 	{
-		buffer = path_lst;
+		buffer = path_lst[0];
 		while (buffer->next)
 			buffer = buffer->next;
 		if (!(buffer->next = ft_new_lst(adjlst)))
@@ -41,7 +42,7 @@ static t_lst		*ft_path_lst_push_back(t_lemin *lemin,
 			free_graph(lemin);
 			exit(EXIT_FAILURE);
 		}
-		return (path_lst);
+		path_lst[1] = buffer->next;
 	}
 	else
 	{
@@ -50,12 +51,12 @@ static t_lst		*ft_path_lst_push_back(t_lemin *lemin,
 			free_graph(lemin);
 			exit(EXIT_FAILURE);
 		}
-		return (buffer);
+		path_lst[0] = buffer;
 	}
 }
 
 static void			ft_paths_push_back(t_lemin *lemin,
-		t_lst *path_lst, int path_len)
+		t_lst *path_lst[2], int path_len)
 {
 	t_path			*buffer;
 
@@ -115,11 +116,11 @@ char				add_shortest_parallel_path_to_paths(t_lemin *lemin)
 {
 	t_adjlst	*adjlst;
 	int			path_len;
-	t_lst		*path_lst;
+	t_lst		*path_lst[2];
 
 	breadth_first_search_to_start(lemin);
 	path_len = 0;
-	path_lst = NULL;
+	path_lst[0] = NULL;
 	adjlst = lemin->start;
 	if (adjlst->visited_pth == 0)
 		adjlst->visited_pth = 1;
@@ -134,7 +135,7 @@ char				add_shortest_parallel_path_to_paths(t_lemin *lemin)
 			if (adjlst != lemin->end)
 				adjlst->visited_pth = 1;
 			path_len++;
-			path_lst = ft_path_lst_push_back(lemin, path_lst, adjlst);
+			ft_path_lst_push_back(lemin, path_lst, adjlst);
 		}
 	ft_paths_push_back(lemin, path_lst, path_len);
 	return (1);

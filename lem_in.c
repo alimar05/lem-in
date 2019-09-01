@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:32:49 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/31 16:47:52 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:22:56 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void		print_paths(t_lemin *lemin)
 				buffer1->start->node.name,
 				buffer1->start->level,
 				buffer1->path_len);
-		buffer2 = buffer1->path_lst;
+		buffer2 = buffer1->path_lst[0];
 		while (buffer2)
 		{
 			printf("    room: name = %s, level = %d, visited_bfs = %d\n",
@@ -149,13 +149,13 @@ static char		is_all_links_to_rooms(t_lemin *lemin)
 
 int			main(void)
 {
-	int		fd;
+//	int		fd;
 	char		*line;
 	t_lemin		lemin;
 
 	initialize(&lemin, &line);
-	fd = open("maps/big.map", O_RDONLY);
-	while (get_next_line(fd, &line))
+//	fd = open("maps/big.map", O_RDONLY);
+	while (get_next_line(0, &line))
 	{
 		if (*line == '#' && *(line + 1) != '#')
 		{
