@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_singly_linked_list.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 13:11:28 by rymuller          #+#    #+#             */
-/*   Updated: 2019/08/31 15:55:19 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:44:14 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static t_adjlst		*ft_new_adjlst(t_node *node)
 	adjlst->node.name = node->name;
 	adjlst->node.x = node->x;
 	adjlst->node.y = node->y;
+	adjlst->node.count_ants_here = 0;
+	adjlst->node.ant_name = 0;
 	adjlst->lst = NULL;
 	adjlst->next = NULL;
 	adjlst->level = 0;
